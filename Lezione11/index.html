@@ -12,18 +12,13 @@
     </head>
     <body>
 
-        <main>
-            <form id="articleForm">
-                <label for="titleInput">Titolo</label>
-                <input id="titleInput" type="text">
-    
-                <label for="contentTextarea">Contenuto</label>
-                <textarea id="contentTextarea" cols="30" rows="10"></textarea>
-    
-                <input type="submit" value="Pubblica">
-            </form>
+        <form id="searchForm">
+            <input id="brandInput" type="text" placeholder="inserisci il brand">
+            <input type="submit" value="Cerca">
+        </form>
 
-        </main>
+        <ul id="foundList">
+        </ul>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         <script src="./public/js/index.js"></script>
