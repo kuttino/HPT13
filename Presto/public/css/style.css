@@ -10,6 +10,8 @@
     --btn-carousel-size: 48px;
 }
 
+/******** RESET ********/
+
 .bg-primary {
     background-color: var(--primary-color) !important;
 }
@@ -17,4 +19,19 @@
 .text-primary {
     color: var(--primary-color) !important;
 }
+
+.btn-accent {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-accent:hover {
+    background-color: var(--primary-color);
+}
+
+
+body {
+    background-color: var(--white);
+}
+
 
