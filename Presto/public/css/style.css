@@ -12,6 +12,7 @@
 
 /******** RESET ********/
 
+
 .bg-primary {
     background-color: var(--primary-color) !important;
 }
@@ -36,6 +37,16 @@ body {
 
 
 
+
+
+/******* CAROSELLO *********/
+.carousel-item img {
+    background-color: #424242;
+    object-fit: contain;
+    aspect-ratio: 4 / 3 !important;
+}
+
+
 /******* CATEGORY CARD *********/
 .category-card {
 
@@ -56,7 +67,7 @@ body {
     background-color: white;
 }
 
-.category-body i {
+.category-body-icon {
 
     display: flex;
     justify-content: center;
@@ -69,3 +80,14 @@ body {
     height: 64px;
 }
 
+.category-body {
+    text-decoration: none;
+}
+
+.category-body h3 {
+    color: black;
+}
+
+.category-body i, .category-body p {
+    color: var(--primary-color);
+}
