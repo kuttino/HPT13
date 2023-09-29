@@ -167,8 +167,3 @@ fetch('https://picsum.photos/v2/list')
 
 
 
-
-
-// application/x-www-form-urlencoded
-'firstname=eric&lastname=cartman'
-
