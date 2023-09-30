@@ -48,7 +48,7 @@
         </header>
 
 
-        <form class="container py-3">
+        <form class="container py-3" id="filteringForm">
             <div class="row bg-primary g-4 pb-3 mb-0">
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
@@ -59,7 +59,7 @@
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <select class="form-select" id="categorySelect">
-                            <option selected>Tutti gli annunci</option>
+                            <option selected value="">Tutti gli annunci</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -83,7 +83,7 @@
                 <div class="col-12 col-md-3">
                     <div class="form-floating">
                         <select class="form-select" id="sortSelect">
-                            <option selected>Nessun Ordine</option>
+                            <option selected value="">Nessun Ordine</option>
                             <option value="descByDate">Dal più recente</option>
                             <option value="ascByDate">Dal più vecchio</option>
                             <option value="ascByPrice">Dal meno costoso</option>
@@ -102,7 +102,7 @@
         </form>
 
         <div class="container my-4">
-            <div class="row g-4">
+            <div id="announcementsRow" class="row g-4">
                 <!--
                 <div class="col-12 col-md-6 col-lg-4">
                     <a href="" class="card">
