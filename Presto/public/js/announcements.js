@@ -1,3 +1,21 @@
+function showCategories(announcements) {
+
+    const categories = new Set();
+    announcements.forEach((announcement) => {
+        categories.add(announcement.category);
+    });
+
+    const categorySelect = document.getElementById('categorySelect');
+    categories.forEach((category) => {
+        // <option value="elettronica">Elettronica</option>
+        const option = document.createElement('option');
+        option.setAttribute('value', category);
+        option.textContent = category;
+
+        categorySelect.appendChild(option);
+    });
+}
+
 function generateAnnouncementCard(announcement) {
 
     let badge = '';
@@ -9,7 +27,10 @@ function generateAnnouncementCard(announcement) {
 
     const createdAt = new Date(announcement.createdAt);
 
-    return `<a href="" class="card">
+    // query string
+    // /Presto/announcement.html?id=1
+
+    return `<a href="/Presto/announcement.html?id=${announcement.id}" class="card">
         <div class="position-relative">
             <img src="https://picsum.photos/seed/237/640/480" class="card-img-top">
             ${badge}
@@ -51,14 +72,15 @@ function showAnnouncements(announcements) {
 
 function filteringAnnouncements(announcements, options) {
 
-    console.log('announcements', announcements);
-    console.log('options', options);
-
     const filteredAnnouncements = announcements.filter((announcement) => {
 
         let isAnnouncementValid = true;
         if(options.search.length > 0) {
             isAnnouncementValid = announcement.name.toLowerCase().includes(options.search.toLowerCase());
+        }
+
+        if(isAnnouncementValid && options.category.length > 0) {
+            isAnnouncementValid = announcement.category.toLowerCase() == options.category.toLowerCase();
         }
 
         if(isAnnouncementValid && options.minPrice.length > 0) {
@@ -72,13 +94,45 @@ function filteringAnnouncements(announcements, options) {
         return isAnnouncementValid;
     });
 
+    if(options.sort.length > 0) {
 
-    // TODO 
-    // ordinamento dell'array
-
+        switch(options.sort) {
+            case 'descByDate':
+                filteredAnnouncements.sort((left, right) => {
+                    return parseInt(right.createdAt) - parseInt(left.createdAt);
+                });
+                break;
+            case 'ascByDate':
+                filteredAnnouncements.sort((left, right) => {
+                    return parseInt(left.createdAt) - parseInt(right.createdAt);
+                });
+                break;
+            case 'ascByPrice':
+                filteredAnnouncements.sort((left, right) => {
+                    return parseFloat(left.price) - parseFloat(right.price);
+                });
+                break;
+            case 'descByPrice':
+                filteredAnnouncements.sort((left, right) => {
+                    return parseFloat(right.price) - parseFloat(left.price);
+                });
+                break;
+            case 'ascByAlpha':
+                filteredAnnouncements.sort((left, right) => {
+                    return left.name.toLowerCase().localeCompare(right.name.toLowerCase());
+                });
+                break;
+            case 'descByAlpha':
+                filteredAnnouncements.sort((left, right) => {
+                    return right.name.toLowerCase().localeCompare(left.name.toLowerCase());
+                });
+                break;
+        }
+    }
 
     return filteredAnnouncements;
 }
+
 
 
 
@@ -89,6 +143,9 @@ fetch('/Presto/server/api/annunci.json')
     })
     .then((announcements) => {
         foundAnnouncements = announcements;
+
+        showCategories(announcements);
+
         showAnnouncements(announcements);
     })
     .catch((error) => {
@@ -128,3 +185,17 @@ filteringForm.addEventListener('submit', (event) => {
 
 
 
+// return < 0 ------> [left, right]
+// return > 0 ------> [right, left]
+
+
+/*
+    nel caso in cui left=3 e right=5 ritorniamo -2 affinchè l'array ordinato sia [left, right] = [3, 5]
+    nel caso in cui left=5 e right=3 ritorniamo +2 affinchè l'array ordinato sia [right, left] = [3, 5]
+const arr = [3, 5];
+
+arr.sort((left, right) => {
+    return left - right;
+})
+
+*/
