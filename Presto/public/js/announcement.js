@@ -1,9 +1,11 @@
-function showAnnouncement(announcement) {
+
+
+
+function createAnnouncement(announcement) {
 
     const createdAt = new Date(announcement.createdAt);
 
-    const announcementRow = document.getElementById('announcementRow');
-    announcementRow.innerHTML = `
+    return `
         <div class="col-12 col-md-6 p-0">
             <img src="https://picsum.photos/seed/237/640/480" class="card-img-top">
         </div>
@@ -22,26 +24,30 @@ function showAnnouncement(announcement) {
     `;
 }
 
-const rawQuery = window.location.search;
-const query = new URLSearchParams(rawQuery);
 
-const id = query.get('id');
 
-fetch('/Presto/server/api/annunci.json')
-    .then((response) => {
-        return response.json();
-    })
-    .then((announcements) => {
 
-        const announcementFound = announcements.find((announcement) => {
-            return announcement.id == id;
-        });
 
-        showAnnouncement(announcementFound);
-    })
-    .catch((error) => {
-        console.error(error);
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const rawQuery = window.location.search;
+    const query = new URLSearchParams(rawQuery);
+    
+    const id = query.get('id');
+
+    const response = await fetch('/Presto/server/api/annunci.json');
+    const announcements = await response.json();
+
+
+    const announcementRow = document.getElementById('announcementRow');
+
+    const announcementFound = announcements.find((announcement) => {
+        return announcement.id == id;
     });
+
+    announcementRow.innerHTML = createAnnouncement(announcementFound);
+});
 
 
 
