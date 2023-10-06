@@ -5,7 +5,7 @@ function sum(x, y) {
 }
 
 
-let x = 3;
-let y = 5;
+let x = 'ciao';
+let y = 'mamma';
 let result = sum(x, y);
 console.log(result);

@@ -75,19 +75,19 @@ function filteringAnnouncements(announcements, options) {
     const filteredAnnouncements = announcements.filter((announcement) => {
 
         let isAnnouncementValid = true;
-        if(options.search.length > 0) {
+        if(options.search) {
             isAnnouncementValid = announcement.name.toLowerCase().includes(options.search.toLowerCase());
         }
 
-        if(isAnnouncementValid && options.category.length > 0) {
+        if(isAnnouncementValid && options.category) {
             isAnnouncementValid = announcement.category.toLowerCase() == options.category.toLowerCase();
         }
 
-        if(isAnnouncementValid && options.minPrice.length > 0) {
+        if(isAnnouncementValid && options.minPrice) {
             isAnnouncementValid = parseFloat(announcement.price) >= parseFloat(options.minPrice);
         }
 
-        if(isAnnouncementValid && options.maxPrice.length > 0) {
+        if(isAnnouncementValid && options.maxPrice) {
             isAnnouncementValid = parseFloat(announcement.price) <= parseFloat(options.maxPrice);
         }
 
